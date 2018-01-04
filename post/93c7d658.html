@@ -3,18 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>冷月孤狼’Blog</title>
+    <title>SpringBoot获得application.properties中数据的几种方式 | 冷月孤狼’Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="做自己爱做的事，爱自己在做的事！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="冷月孤狼’Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+    <meta name="description" content="SpringBoot获得application.properties中数据的几种方式">
+<meta name="keywords" content="springBoot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot获得application.properties中数据的几种方式">
+<meta property="og:url" content="http://yoursite.com/post/93c7d658.html">
 <meta property="og:site_name" content="冷月孤狼’Blog">
-<meta property="og:description" content="做自己爱做的事，爱自己在做的事！">
+<meta property="og:description" content="SpringBoot获得application.properties中数据的几种方式">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-01-04T02:31:05.893Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="冷月孤狼’Blog">
-<meta name="twitter:description" content="做自己爱做的事，爱自己在做的事！">
+<meta name="twitter:title" content="SpringBoot获得application.properties中数据的几种方式">
+<meta name="twitter:description" content="SpringBoot获得application.properties中数据的几种方式">
     
 
     
@@ -209,16 +211,15 @@
 </aside>
 
             
-            <section id="main">
-    <article id="post-spring boot 获取配置信息" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-spring boot 获取配置信息" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
             <header class="article-header">
                 
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/post/93c7d658.html">SpringBoot获得application.properties中数据的几种方式</a>
+        <h1 class="article-title" itemprop="name">
+            SpringBoot获得application.properties中数据的几种方式
         </h1>
     
 
@@ -247,10 +248,14 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p><p>SpringBoot获得application.properties中数据的几种方式</p></p>
-            <p class="article-more-link">
-                <a href="/post/93c7d658.html#more">查看更多</a>
-            </p>
+            
+            <p>SpringBoot获得application.properties中数据的几种方式</p>
+<a id="more"></a>
+<p>#####第一种方式<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringBoot01Application</span> </span>&#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">        ConfigurableApplicationContext  context=SpringApplication.run(SpringBoot01Application.class, args);  </span><br><span class="line">        &lt;span style="color:#FF0000;"&gt;String str1=context.getEnvironment().getProperty("aaa");&lt;/span&gt;  </span><br><span class="line">        System.out.println(str1);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#####第二种方式（自动装配到Bean中）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.core.env.Environment;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;  </span><br><span class="line">  </span><br><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Autowired</span>  </span><br><span class="line">    <span class="keyword">private</span> Environment env;  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">"=========&gt;"</span> + env.getProperty(<span class="string">"aaa"</span>));  </span><br><span class="line">  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#####第三种方式（使用@value注解）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.demo.entity;    </span><br><span class="line">    </span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;    </span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.PropertySource;    </span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;    </span><br><span class="line">    </span><br><span class="line"><span class="meta">@Component</span>    </span><br><span class="line"><span class="meta">@PropertySource</span>(<span class="string">"classpath:jdbc.properties"</span>)<span class="comment">//如果是application.properties，就不用写@PropertyScource("application.properties")，其他名字用些    </span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Jdbc</span> </span>&#123;    </span><br><span class="line">        </span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;jdbc.user&#125;"</span>)  </span><br><span class="line">    <span class="keyword">private</span> String user;    </span><br><span class="line">        </span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;jdbc.password&#125;"</span>)   </span><br><span class="line">    <span class="keyword">private</span> String password;    </span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">speack</span><span class="params">()</span></span>&#123;    </span><br><span class="line">        System.out.println(<span class="string">"username:"</span>+user+<span class="string">"------"</span>+<span class="string">"password:"</span>+password);    </span><br><span class="line">    &#125;    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
         
         </div>
         <footer class="article-footer">
@@ -332,134 +337,24 @@
         </footer>
     </div>
     
-</article>
-
-
-
-    <article id="post-FileOperate" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
         
-        
-            <header class="article-header">
-                
+<nav id="article-nav">
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/post/626da23a.html">File文件操作</a>
-        </h1>
     
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/post/626da23a.html">
-            <time datetime="2017-12-06T07:56:39.000Z" itemprop="datePublished">2017-12-06</time>
+        <a href="/post/626da23a.html" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">File文件操作</div>
         </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/javase/">javase</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><p>java文件操作</p></p>
-            <p class="article-more-link">
-                <a href="/post/626da23a.html#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://yoursite.com/post/626da23a.html" data-id="cjbzvckag000044kq9p0ie4mj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
     
+</nav>
 
-        </footer>
-    </div>
+
     
 </article>
 
+
+    
+    
 
 </section>
             
